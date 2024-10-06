@@ -1,7 +1,6 @@
-const { drizzle } = await import("drizzle-orm/postgres-js");
-const { migrate } = await import("drizzle-orm/postgres-js/migrator");
-const { default: postgres } = await import("postgres");
-
+import { drizzle } from "drizzle-orm/postgres-js";
+import { migrate } from "drizzle-orm/postgres-js/migrator";
+import postgres from "postgres";
 import { config } from "dotenv";
 config({
   path: ".local.env",

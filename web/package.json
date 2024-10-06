@@ -4,16 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:all": "concurrently \"bun run db-up\" \"bun run migrate-local\" \"next dev\"",
+    "dev:all": "concurrently \"npm run db-up\" \"npm run migrate-local\" \"next dev\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate": "bunx drizzle-kit generate:pg",
-    "migrate-production": "bun run migrate.mts",
-    "migrate-local": "SSL=false LOCAL=true bun run migrate.mts",
+    "generate": "npx drizzle-kit generate:pg",
+    "migrate-production": "vite-node migrate.mts",
+    "migrate-local": "cross-env SSL=false LOCAL=true vite-node migrate.mts",
     "db-up": "docker-compose up",
-    "db-dev": "bun run db-up && bun run migrate-local",
-    "lint:fix": "bunx @biomejs/biome lint --apply ./src"
+    "db-dev": "npm run db-up && npm run migrate-local",
+    "lint:fix": "npx @biomejs/biome lint --apply ./src"
   },
   "dependencies": {
     "@algolia/autocomplete-core": "^1.13.0",
@@ -113,6 +113,7 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
     "drizzle-kit": "^0.20.6",
     "eslint": "8.34.0",
@@ -120,6 +121,7 @@
     "postgres": "^3.4.3",
     "sharp": "^0.33.1",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite-node": "^2.1.2"
   }
 }
