@@ -1,0 +1,20 @@
+include:
+  - "./web/docker-compose.yml"
+services:
+  comfy-deploy:
+    build:
+      context: .
+      target: comfy_deploy
+      dockerfile: ./local/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./local/scripts/entrypoint.sh:/comfyui-deploy/web/deploy_entrypoint.sh
+    entrypoint: /comfyui-deploy/web/deploy_entrypoint.sh
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - localstack
+      - pg_proxy
+    environment:
+      VSCODE_DEV_CONTAINER: true

@@ -86,7 +86,7 @@ function MachineWS({
   );
   const [sid, setSid] = useState("");
 
-  const wsEndpoint = machine.endpoint.replace(/^http/, "ws");
+  const wsEndpoint = machine.endpoint.replace(/^http/, "ws").replace("host.docker.internal", "localhost");
   const { lastMessage, readyState } = useWebSocket(
     `${wsEndpoint}/comfyui-deploy/ws`,
     {

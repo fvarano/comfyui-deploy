@@ -34,10 +34,12 @@ export const editWorkflowOnMachine = withServerPromise(
 
     const userName = await getOrgOrUserDisplayName(orgId, userId);
 
-    let endpoint = machine.endpoint;
+    let endpoint;
 
     if (machine.type === "comfy-deploy-serverless") {
       endpoint = machine.endpoint.replace("comfyui-api", "comfyui-app");
+    } else {
+        endpoint = machine.endpoint.replace("host.docker.internal", "localhost");
     }
 
     return `${endpoint}?workflow_version_id=${encodeURIComponent(
